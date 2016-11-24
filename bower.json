@@ -1,6 +1,10 @@
 {
   "name": "manmaru.validationutil",
   "main": "manmaru.validationutil.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrien-dufond/manmaru.validationutil.git"
+  },
   "authors": [
     "Adrien Dufond <adrien.dufond@gmail.com>"
   ],
