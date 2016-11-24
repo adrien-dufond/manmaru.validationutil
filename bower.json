@@ -4,7 +4,7 @@
   "authors": [
     "Adrien Dufond <adrien.dufond@gmail.com>"
   ],
-  "description": "javascript utilities for cookie data manipulating",
+  "description": "javascript utilities for form data verification",
   "keywords": [
     "validation",
     "manmaru"
