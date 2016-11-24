@@ -1,0 +1,14 @@
+{
+  "name": "manmaru.validationutil",
+  "main": "manmaru.validationutil.js",
+  "authors": [
+    "Adrien Dufond <adrien.dufond@gmail.com>"
+  ],
+  "description": "javascript utilities for cookie data manipulating",
+  "keywords": [
+    "cookie",
+    "manmaru"
+  ],
+  "license": "MIT",
+  "homepage": "www.manmaru.fr"
+}
