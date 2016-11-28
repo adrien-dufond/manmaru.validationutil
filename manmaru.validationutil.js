@@ -33,14 +33,9 @@ ValidationUtil = (function() {
 		@return Returns <code>true</code> if string is a valid email; otherwise <code>false</code>.
 	*/
     	ValidationUtil.isEmail = function(email) {
-		if (email.length < 6 || ValidationUtil.isEmpty(email)) { return false; }
-		if (StringUtil.contains(email, ' ') > 0) { return false; }
-		if (StringUtil.contains(email, '@') != 1) { return false; }
-		var atSign  = email.indexOf('@');
-		var lastDot = email.lastIndexOf('.');
-		if ((lastDot < atSign + 2) || (lastDot > email.length - 3)) { return false; }
-		return true;		
-	}
+			var pattern  = new RegExp(/^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,4}$/i);
+            return email.match(pattern) != null;
+		}
 	
 	/**
 		Determines if string is blank or contains only tabs, linefeeds, carriage returns and spaces.
@@ -58,6 +53,35 @@ ValidationUtil = (function() {
 	ValidationUtil.isPhone = function(phone) {
 		return StringUtil.getNumbersFromString(phone).length >= 10;
 	}
+
+  /**
+        Determines if credit card is valid using the Luhn formula.
+         
+        @param cardNumber: The credit card number.
+        @return Returns <code>true</code> if String is a valid credit card number; otherwise <code>false</code>.
+    */
+ 	ValidationUtil.isCreditCard = function(cardNumber) {
+        if (cardNumber.length < 7 || cardNumber.length > 19 || Number(cardNumber) < 1000000)
+            return false;
+         
+        var sum = 0,
+        	alt = true,
+        	i   = cardNumber.length,
+        	pre;
+         
+        while (--i > -1) {
+            if (alt)
+                sum += Number(cardNumber.substr(i, 1));
+            else {
+                pre =  Number(cardNumber.substr(i, 1)) * 2;
+                sum += (pre > 8) ? pre -= 9 : pre;
+            }
+             
+            alt = !alt;
+        }
+         
+        return sum % 10 == 0;
+    }
 	
 	/**
 		Determines if numbers in string are a valid US zip code length.
