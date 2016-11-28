@@ -17,6 +17,35 @@ ValidationUtil = (function() {
 
     function ValidationUtil() {}
     
+
+    ValidationUtil.contains = function(source, search) {
+		var i     = source.indexOf(search),
+		total = 0;
+		while (i > -1) {
+			i = source.indexOf(search, i + 1);
+			total++;
+		}
+		return total;
+	}
+    ValidationUtil.removeWhitespace = function(src) { return src.replace( /\s/g, "");  }
+    ValidationUtil.removeAt = function(source, position) { return ValidationUtil.replaceAt(source, position, ''); }
+    ValidationUtil.getNumbersFromString = function(source) {
+		var i = -1;
+		while (++i < source.length) {
+			if (isNaN(source.charAt(i))) {
+				source = ValidationUtil.removeAt(source, i);
+				i--;
+			}
+		}
+		return source;
+	}
+	ValidationUtil.replaceAt = function(source, position, replace) {
+		var parts = source.split('');
+		parts.splice(position, 1, replace);
+		return parts.join('');
+	}
+	
+
     /**
 		Determines if string contains search string.
 		@param source: String to search in.
@@ -24,7 +53,7 @@ ValidationUtil = (function() {
 		@return Returns <code>true</code> if source string contains search string; otherwise <code>false</code>.
 	*/
 	ValidationUtil.contains = function(source, search) {
-		return StringUtil.contains(source, search) > 0;
+		return ValidationUtil.contains(source, search) > 0;
 	}
 	
     /**
@@ -43,7 +72,7 @@ ValidationUtil = (function() {
 		@return Returns <code>true</code> if string is empty; otherwise <code>false</code>.
 	*/
     	ValidationUtil.isEmpty = function(str) {
-    		if(StringUtil.removeWhitespace(str) == "") { return true; } else { return false; };
+    		if(ValidationUtil.removeWhitespace(str) == "") { return true; } else { return false; };
     	}
     /**
 		Determines if numbers in string are equal to or greater than a valid phone number length.
@@ -51,10 +80,10 @@ ValidationUtil = (function() {
 		@return Returns <code>true</code> if phone number; otherwise <code>false</code>.
 	*/
 	ValidationUtil.isPhone = function(phone) {
-		return StringUtil.getNumbersFromString(phone).length >= 10;
+		return ValidationUtil.getNumbersFromString(phone).length >= 10;
 	}
 
-  /**
+ 	/**
         Determines if credit card is valid using the Luhn formula.
          
         @param cardNumber: The credit card number.
@@ -89,7 +118,7 @@ ValidationUtil = (function() {
 		@return Returns <code>true</code> if zip code; otherwise <code>false</code>.
 	*/
 	ValidationUtil.isZip = function(zip) {
-		var l = StringUtil.getNumbersFromString(zip).length;
+		var l = ValidationUtil.getNumbersFromString(zip).length;
 		return (l == 5 || l == 9);
 	}
 	
