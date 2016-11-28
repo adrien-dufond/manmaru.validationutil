@@ -10,4 +10,5 @@ under development...
 <b>isEmpty</b> -> Determines if string is blank or contains only tabs, linefeeds, carriage returns and spaces.<br>
 <b>isPhone</b> -> Determines if numbers in string are equal to or greater than a valid phone number length.<br>
 <b>isZip</b> -> Determines if numbers in string are a valid US zip code length.<br>
+<b>isCreditCard</b> -> Determines if credit card is valid using the Luhn formula.
 
